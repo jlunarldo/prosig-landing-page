@@ -1,0 +1,93 @@
+h1, h2, h3, h4 {
+    font-family: var(--fd);
+    margin: 0;
+    line-height: 1.08;
+    letter-spacing: -.02em;
+}
+h2 {
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
+
+.wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding-left: 22px;
+    padding-right: 22px;
+}
+
+@media (min-width: 861px) {
+    .wrap {
+        padding-left: clamp(32px, 5vw, 64px);
+        padding-right: clamp(32px, 5vw, 64px);
+    }
+}
+
+.sec {
+    padding: 88px 0;
+}
+
+@media (min-width: 861px) {
+    .sec {
+        padding: clamp(110px, 11vw, 160px) 0;
+    }
+}
+
+.sectionTitle {
+ 
+    font-family: var(--fd);
+    font-weight: 800;
+    font-size: clamp(32px, 8.6vw, 64px);
+    line-height: 1.04;
+    letter-spacing: -.03em;
+    text-wrap: balance;
+    
+}
+
+
+.sectionContent {
+  width: 100%;
+ 
+}
+
+.section--dark {
+  background-color: #12123A;
+  color: #F4F1EA;
+}
+
+.section--accent {
+  background-color: var(--cream);
+}
+
+.sectionEyebrow {
+ 
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 22px;
+
+}
+
+.sectionEyebrow::after {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 1px;
+  flex-shrink: 0;
+  background-color: currentColor;
+}
+.sectionHighlight {
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -.03em;
+  color: var(--indigo);
+}
+
