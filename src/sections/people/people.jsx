@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import SectionGeneric from "../../components/SectionGeneric/SectionGeneric";
-import "./People.css";
+import "./people.css";
 
 const portrait = (gender, n) =>
   `https://randomuser.me/api/portraits/${gender}/${n}.jpg`;
