@@ -1,7 +1,7 @@
 
 import SectionGeneric from "../../components/SectionGeneric/SectionGeneric";
 
-import "./WhyUs.css";
+import "./whyUs.css";
 
 const benefits = [
   {
