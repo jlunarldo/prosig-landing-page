@@ -58,7 +58,7 @@ function People() {
         {people.map(({ name, role, color, image }, i) => (
           <article className="person" key={name} style={{ "--i": i }}>
             <div className="person__photo">
-              <img src={image} alt={`Portrait of ${name}`} loading="lazy" />
+              {/*<img src={image} alt={`Portrait of ${name}`} loading="lazy" />*/}
             </div>
 
             <span className="person__corner" aria-hidden="true">
