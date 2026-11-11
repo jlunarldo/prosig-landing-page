@@ -1,0 +1,119 @@
+
+.display {
+    font-family: var(--fd);
+    font-weight: 800;
+    font-size: clamp(44px, 12.4vw, 120px);
+    line-height: .98;
+    letter-spacing: -.04em;
+    text-wrap: balance;
+}
+
+
+.display em, .title em, .pull em {
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: -.03em;
+    color: var(--indigo);
+}
+
+.u {
+    position: relative;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.u.draw.on::after {
+    clip-path: inset(0 0 0 0);
+}
+.display .u::after {
+    bottom: -.08em;
+    height: .2em;
+}
+.u.draw::after {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path .9s cubic-bezier(.6, 0, .2, 1) .2s;
+}
+.u::after {
+    content: "";
+    position: absolute;
+    left: -3%;
+    right: -3%;
+    bottom: -.16em;
+    height: .26em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16' preserveAspectRatio='none'%3E%3Cpath d='M3 12C50 5 125 3 197 7' fill='none' stroke='%2300DCB8' stroke-width='3.5' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+    pointer-events: none;
+}
+
+
+
+.deck {
+    margin-top: 14px;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 34ch;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 54px;
+    padding: 0 26px;
+    border-radius: 999px;
+    border: 0;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: var(--fb);
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color .2s, transform .2s;
+}
+.trust {
+    margin-top: 34px;
+    padding-top: 16px;
+    border-top: 1px solid var(--faint);
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 560px;
+}
+ .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    row-gap: 12px;
+    column-gap: 12px;
+    margin-top: 20px;
+}
+.trust span {
+    font-size: 12px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ink);
+    margin-right: 6px;
+}
+
+
+@media (min-width: 861px) {
+    .display {
+        font-size: clamp(56px, 6.6vw, 104px);
+    }
+}
+
+@media (min-width: 861px) {
+    .deck {
+        font-size: 22px;
+    }
+}
+
+
+@media (max-width: 860px) {
+    .display {
+        font-size: clamp(38px, 11vw, 60px);
+    }
+}

@@ -7,6 +7,7 @@ import WhyUs from './sections/whyus/whyus';
 import People from './sections/people/people';
 import Questions from './sections/Question/Question';
 import ButtonCallMobile from "./features/ButtonCallMobile/ButtonCallMobile";
+import Hero from './sections/Hero/Hero';
 function App() {
  
 
@@ -14,6 +15,7 @@ function App() {
      <>
         <body>
           <ReadingBar />
+          <Hero></Hero>
         <HeaderComponent/>
         <main id='main'>
           <WhereItHurts/>
