@@ -1,6 +1,7 @@
+
 import { useEffect, useRef, useState } from "react";
 import SectionGeneric from "../../components/SectionGeneric/SectionGeneric";
-import "./questions.css";
+import styles from "./questions.module.css";
 
 const questions = [
   {
@@ -58,7 +59,10 @@ export default function Questions() {
       { threshold: 0.1 }
     );
 
-    observer.observe(listRef.current);
+    if (listRef.current) {
+      observer.observe(listRef.current);
+    }
+
     return () => observer.disconnect();
   }, []);
 
@@ -72,14 +76,12 @@ export default function Questions() {
     >
       <div
         ref={listRef}
-        className={`questions__list ${visible ? "in" : ""}`.trim()}
+        className={`${styles.qa} ${visible ? styles.in : ""}`}
+        id="qa"
+        data-stagger=""
       >
-        {questions.map((item, i) => (
-          <details
-            className="questions__item"
-            key={item.question}
-            style={{ "--i": i }}
-          >
+        {questions.map((item, index) => (
+          <details key={item.question} style={{ "--i": index }}>
             <summary>{item.question}</summary>
             <p>{item.answer}</p>
           </details>

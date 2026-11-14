@@ -1,5 +1,9 @@
 import styles from "./sectiongeneric.module.css";
+import StripMosaic from "../../features/Mosaic/StripMosaic";
+import { useRef } from "react";
 
+
+let seedCounter = 3;
 
 function SectionGeneric({
   id,
@@ -11,6 +15,11 @@ function SectionGeneric({
   backgroundColor="var(--cream)",
   titleMaxWidth
 }) {
+  const stripRef = useRef(null);
+
+  const stripSeed = useRef(seedCounter);
+  seedCounter += 5;
+
     const renderTitle = () => {
   if (!highlight) return title;
 
@@ -31,11 +40,27 @@ function SectionGeneric({
     
 
   return (
+    
+    <>
+
+     
+    
+
+    <div className={styles.mstrip} aria-hidden="true">
+       <canvas ref={stripRef} width="810" height="56" />
+      <StripMosaic canvasRef={stripRef}
+        seed={stripSeed.current}
+        rows={2}
+        density={1}>
+
+      </StripMosaic>
+    </div>
     <section
       id={id}
       className={`${styles.sec} ${className}`.trim()}
       style={{ backgroundColor }}
     >
+     
       <div className={styles.wrap}>
         {eyebrow && (
             <p className={styles.sectionEyebrow}>
@@ -58,6 +83,7 @@ function SectionGeneric({
       
       </div>
     </section>
+    </>
   );
 }
 

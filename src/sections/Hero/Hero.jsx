@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import HeroFirst from "./hero-slides/Slide-First/HeroFirst";
 import HeroSecond from "./hero-slides/Slide-Second/HeroSecond";

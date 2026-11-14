@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
+
 import {
-  LOGO,
+  KEYS,
   getPalette,
   makeRng,
   drawPiece,
@@ -10,181 +11,130 @@ import {
   prefersReducedMotion,
 } from "./mosaicUtils";
 
-export default function StripMosaic({ className, style }) {
-  const canvasRef = useRef(null);
+export default function StripMosaic({
+  className = "",
+  style,
+  seed = 3,
+  rows = 2,
+  density = 0.55,
+  alpha = 1,
+  canvasId,
+  canvasRef
+}) {
+  
 
   useEffect(() => {
     const cv = canvasRef.current;
+    if (!cv) return;
+
     const host = cv.parentElement;
     const reduce = prefersReducedMotion();
 
-    let W, H, S, ctx;
+    let ctx;
+    let W;
+    let H;
     let cells = [];
     let P = getPalette();
-    let pointer = null;
 
     function layout() {
       P = getPalette();
+
       ({ ctx, W, H } = sizeCanvas(cv));
 
-      const rnd = makeRng(11);
+      const rnd = makeRng(seed);
 
-      S = W < 861 ? 18 : 26;
-
-      const cols = Math.ceil(W / S) + 1;
-      const rows = Math.ceil(H / S) + 1;
-
-      const mob = W < 861;
-
-      const cx = mob ? W / 2 : W * 0.74;
-      const cy = mob ? H * 0.3 : H * 0.5;
-
-      const B = mob
-        ? Math.min(W * 0.56, H * 0.32)
-        : Math.min(W * 0.32, H * 0.6);
-
-      const m = new DOMMatrix()
-        .translate(cx - B / 2, cy - B / 2)
-        .scale(B / 120);
-
-      const path = new Path2D();
-
-      LOGO.forEach((d) => {
-        path.addPath(new Path2D(d), m);
-      });
-
-      const dpr = cv.width / W;
+      const S = H / rows;
+      const cols = Math.ceil(W / S);
 
       cells = [];
 
       for (let j = 0; j < rows; j++) {
         for (let i = 0; i < cols; i++) {
-          const x = i * S + S / 2;
-          const y = j * S + S / 2;
-
-          const inP = ctx.isPointInPath(
-            path,
-            x * dpr,
-            y * dpr
-          );
-
           cells.push({
-            x,
-            y,
-            kick: 0,
-            seed: rnd() * 6.28,
-
-            r: 0,
-            c: "navy",
-            a: inP ? 1 : 0.07,
-            k: inP ? 0.12 : 1,
+            x: i * S + S / 2,
+            y: j * S + S / 2,
+            s: S * 0.9,
+            r: Math.floor(rnd() * 4) * 90,
+            c: KEYS[Math.floor(rnd() * 4)],
+            on: rnd() < density,
+            d: i / cols,
           });
         }
       }
     }
 
-    const setPointer = (e) => {
-      const r = cv.getBoundingClientRect();
-
-      pointer = {
-        x: e.clientX - r.left,
-        y: e.clientY - r.top,
-      };
-    };
-
-    const clearPointer = () => {
-      pointer = null;
-    };
-
     let resizeTimer;
 
-    const onResize = () => {
+    function onResize() {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(layout, 120);
-    };
+    }
 
-    host.addEventListener("pointermove", setPointer);
-    host.addEventListener("pointerdown", setPointer);
-    host.addEventListener("pointerleave", clearPointer);
     window.addEventListener("resize", onResize);
 
     const stopTheme = watchTheme(() => {
       P = getPalette();
     });
 
-    const t0 = performance.now();
-    let lastNow = t0;
+    layout();
 
-    const stopLoop = startLoop((now) => {
-      const dt = (now - lastNow) / 1000;
-      lastNow = now;
-
+    const stopLoop = startLoop(() => {
       const r = cv.getBoundingClientRect();
 
-      if (r.bottom < 0 || r.top > window.innerHeight) {
+      if (
+        r.bottom < -50 ||
+        r.top > window.innerHeight + 50
+      ) {
         return;
       }
 
-      const t = (now - t0) / 1000;
-
-      ctx.fillStyle = P.bg;
-      ctx.fillRect(0, 0, W, H);
-
-      const s = S - S * 0.08;
-
-      for (const c of cells) {
-        let rot = c.r;
-
-        if (!reduce) {
-          rot += Math.sin(t * 0.6 + c.seed) * 2;
-        }
-
-        if (pointer && !reduce) {
-          const d = Math.hypot(
-            c.x - pointer.x,
-            c.y - pointer.y
+      const p = reduce
+        ? 0.5
+        : Math.max(
+            0,
+            Math.min(
+              1,
+              1 -
+                (r.top + r.height / 2) /
+                  window.innerHeight
+            )
           );
 
-          if (d < S * 3.2) {
-            c.kick = Math.min(
-              c.kick +
-                (1 - d / (S * 3.2)) * 18,
-              90
-            );
-          }
-        }
+      ctx.clearRect(0, 0, W, H);
 
-        c.kick *= 0.94;
-        rot += c.kick;
+      for (const c of cells) {
+        if (!c.on) continue;
 
-        const color = P[c.c];
-
-        ctx.globalAlpha = Math.min(
-          1,
-          c.a +
-            (c.kick / 90) * 0.8
+        const local = Math.max(
+          0,
+          Math.min(
+            1,
+            p * 1.6 - c.d * 0.6
+          )
         );
 
+        const col = P[c.c];
+
+        ctx.globalAlpha = alpha;
+
         ctx.fillStyle = `rgb(
-          ${color[0] | 0},
-          ${color[1] | 0},
-          ${color[2] | 0}
+          ${col[0]},
+          ${col[1]},
+          ${col[2]}
         )`;
 
         drawPiece(
           ctx,
           c.x,
           c.y,
-          s,
-          rot,
-          c.k
+          c.s,
+          c.r + ease(local) * 180,
+          1
         );
       }
 
       ctx.globalAlpha = 1;
     });
-
-    layout();
 
     return () => {
       stopLoop();
@@ -192,26 +142,14 @@ export default function StripMosaic({ className, style }) {
 
       clearTimeout(resizeTimer);
 
-      host.removeEventListener("pointermove", setPointer);
-      host.removeEventListener("pointerdown", setPointer);
-      host.removeEventListener("pointerleave", clearPointer);
       window.removeEventListener("resize", onResize);
     };
-  }, []);
+  }, [seed, rows, density, alpha, canvasRef]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className={className}
-      aria-hidden="true"
-      style={{
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        display: "block",
-        ...style,
-      }}
-    />
-  );
+  return null;
 }
+
+const ease = (x) => {
+  x = Math.max(0, Math.min(1, x));
+  return x * x * (3 - 2 * x);
+};

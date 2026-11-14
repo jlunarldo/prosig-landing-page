@@ -1,5 +1,4 @@
 import React from 'react'
-import StripMosaic from '../../../../features/Mosaic/StripMosaic'
 import styles from "./herosecond.module.css";
 
 export default function HeroSecond() {

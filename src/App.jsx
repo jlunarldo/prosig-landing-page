@@ -8,6 +8,9 @@ import People from './sections/people/people';
 import Questions from './sections/Question/Question';
 import ButtonCallMobile from "./features/ButtonCallMobile/ButtonCallMobile";
 import Hero from './sections/Hero/Hero';
+import Band from './sections/Band/band';
+import CloseMain from './sections/Close/CloseMain';
+import Footer from './sections/Footer/footer';
 function App() {
  
 
@@ -15,15 +18,20 @@ function App() {
      <>
         <body>
           <ReadingBar />
-          <Hero></Hero>
+          
         <HeaderComponent/>
         <main id='main'>
+          <Hero/>
           <WhereItHurts/>
-         <WhyUs/>
+          <WhyUs/>
           <People/>
-           <Questions/>
+          <Band/>
+          <Questions/>
+           <CloseMain/>
           <ButtonCallMobile/>
+           
         </main>
+        <Footer/>
         </body>
         
         

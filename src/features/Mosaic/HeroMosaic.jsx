@@ -319,7 +319,7 @@ export default function HeroMosaic({
       window.removeEventListener("pointerup", onPointerUp);
       window.removeEventListener("resize", onResize);
     };
-  }, [logoPaths]);
+  }, [logoPaths, canvasId]);
 
   return null;
 }
