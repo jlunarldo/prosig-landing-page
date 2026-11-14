@@ -13,7 +13,7 @@ export default function HeroThird() {
     The team your company needs right now. Tell us what’s in the way.
   </p>
 
-  <a className={styles.textlink} href="#compose">
+  <a className={styles.textlink} href="#compose" id='heroCta'>
     Start with what hurts ↓
   </a>
     </>

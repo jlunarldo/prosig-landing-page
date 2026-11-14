@@ -45,7 +45,7 @@ export default function WhereItHurts() {
 
   return (
     <SectionGeneric
-      id="wih"
+      id="compose"
       eyebrow="Where it hurts"
       title="What's getting in the way?"
       highlight="in the way?"

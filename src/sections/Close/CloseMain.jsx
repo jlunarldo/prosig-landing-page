@@ -2,7 +2,7 @@ import styles from "./closemain.module.css";
 import ButtonCall from "../../features/ButtonCallTrigger/ButtonCall";
 export default function CloseMain() {
   return (
-    <section className={`${styles.sec} ${styles.close}`} id="end">
+    <section className={`${styles.sec} ${styles.close}`} id="close">
       <div className={styles.seatshape} id="seatshape" aria-hidden="true">
         <svg
           className={styles.pc}
