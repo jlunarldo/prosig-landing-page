@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import Button from "../../components/Button/Button";
 import styles from "./mobileButton.module.css";
-
+import ButtonCall from "../ButtonCallTrigger/ButtonCall";
 export default function ButtonCallMobile() {
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
@@ -19,9 +18,11 @@ export default function ButtonCallMobile() {
 
   return (
     <div className={`${styles.mcta} ${show ? styles.show : ""}`.trim()}>
-      <Button className={styles.btn} onClick={() => setOpen(true)}>
-        Book a free 30-min call
-      </Button>
+      <ButtonCall
+      className={styles.btn}
+      text="Book a free 30-min call"
+      ></ButtonCall>
+      
     </div>
   );
 }

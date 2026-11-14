@@ -1,16 +1,21 @@
 .mcta {
     position: fixed;
-    left: 12px;
-    right: 12px;
-    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-    z-index: 40;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+
     display: none;
-    transform: translateY(140%);
+    box-sizing: border-box;
+
+    padding: 12px 12px calc(12px + env(safe-area-inset-bottom, 0px));
+
+    transform: translateY(150%);
     transition: transform .35s cubic-bezier(.2, .8, .2, 1);
 }
 
 .mcta.show {
-    transform: none;
+    transform: translateY(0);
 }
 
 .mcta .btn {
@@ -24,22 +29,3 @@
         display: block;
     }
 }
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    min-height: 54px;
-    padding: 0 26px;
-    border-radius: 999px;
-    border: 0;
-    background: var(--ink);
-    color: var(--cream);
-    font-family: var(--fb);
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color .2s, transform .2s;
-}
-

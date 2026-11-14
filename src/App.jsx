@@ -16,8 +16,7 @@ function App() {
 
   return (
      <>
-        <body>
-          <ReadingBar />
+         <ReadingBar />
           
         <HeaderComponent/>
         <main id='main'>
@@ -32,7 +31,6 @@ function App() {
            
         </main>
         <Footer/>
-        </body>
         
         
     </>

@@ -85,7 +85,7 @@
   color: rgba(246, 243, 236, .75);
 }
 
-/* Stagger animation */
+
 
 .nums[data-stagger] > * {
   transition:
@@ -94,7 +94,7 @@
   transition-delay: calc(var(--i, 0) * 70ms);
 }
 
-/* Responsive */
+
 
 @media (min-width: 861px) {
   .wrap {
@@ -109,7 +109,7 @@
   }
 }
 
-/* Dark theme */
+
 
 @media (prefers-color-scheme: dark) {
   :global(:root:not([data-theme="light"])) .band {
