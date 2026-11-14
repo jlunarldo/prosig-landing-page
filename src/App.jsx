@@ -8,7 +8,7 @@ import People from './sections/people/people';
 import Questions from './sections/Question/Question';
 import ButtonCallMobile from "./features/ButtonCallMobile/ButtonCallMobile";
 import Hero from './sections/Hero/Hero';
-import Band from './sections/Band/band';
+import Band from './sections/Band/Band';
 import CloseMain from './sections/Close/CloseMain';
 import Footer from './sections/Footer/footer';
 function App() {
