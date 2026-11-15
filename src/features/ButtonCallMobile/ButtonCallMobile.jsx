@@ -6,10 +6,12 @@ export default function ButtonCallMobile() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const heroCta = document.getElementById("heroCta");
+    const heroCta = document.getElementById("top");
     const comp = document.getElementById("compose");
     const endSec = document.getElementById("close");
-
+    console.log("heroCta:", heroCta);
+    console.log("compose:", comp);
+    console.log("close:", endSec);
     if (!heroCta || !comp || !endSec) {
       return;
     }

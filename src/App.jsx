@@ -20,6 +20,7 @@ function App() {
           
         <HeaderComponent/>
         <main id='main'>
+          <ButtonCallMobile/>
           <Hero/>
           <WhereItHurts/>
           <WhyUs/>
@@ -27,7 +28,7 @@ function App() {
           <Band/>
           <Questions/>
            <CloseMain/>
-          <ButtonCallMobile/>
+          
            
            
         </main>
